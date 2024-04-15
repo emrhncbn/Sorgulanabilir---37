@@ -22,13 +22,17 @@ Form çalışmıyor. Göreviniz, kullanıcı "Gönder "e tıkladığında gönde
 const [userName, setUserName] = useState('')
 const [commentText, setCommentText] = useState('')
 const [isAnonymous, setIsAnonymous] = useState(false)
+const [userNameError, setUserNameError] = useState('')
+const [commentError, setCommentError] = useState('')
 
 const handleUserNameChange = (event) => {
   setUserName(event.target.value)
+  setUserNameError('')
 }
 
 const handleCommentTextChange = (event) => {
   setCommentText(event.target.value)
+  setCommentError('')
 }
 
 const handleAnonymousChange = (event) => {
@@ -49,7 +53,7 @@ const handleSubmit = (event) => {
 }
 
   const [comments, setComments] = useState(postData.comments)
-
+  
   return (
     <div className='post-container'>
       <PostContent data={{ ...postData }} />
@@ -61,11 +65,13 @@ const handleSubmit = (event) => {
           placeholder='Kullanıcı adı girin.'
           value={userName}
           onChange={handleUserNameChange}
+          required
         />
         <textarea
           placeholder='Ne düşünüyorsunuz?'
           value={commentText}
-          onChange={handleCommentTextChange} />
+          onChange={handleCommentTextChange}
+          required />
         <label>
           <input
           className='checkbox'
